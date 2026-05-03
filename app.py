@@ -653,40 +653,22 @@ with tab2:
 with tab3:
     st.markdown("<div class='section-title'>Bảng so sánh tất cả mô hình</div>", unsafe_allow_html=True)
 
-    # Highlight best/worst
-    best_rmse = df_models["RMSE"].min()
-    best_mae = df_models["MAE"].min()
-    best_mape = df_models["MAPE"].min()
-
-    table_html = """
-    <table class='comparison-table'>
-        <thead>
-            <tr>
-                <th>Mô hình</th><th>Loại</th><th>RMSE ↓</th><th>MAE ↓</th><th>MAPE ↓</th><th>Xếp hạng</th>
-            </tr>
-        </thead>
-        <tbody>
-    """
     ranks = df_models["RMSE"].rank().astype(int).tolist()
-    for i, row in df_models.iterrows():
-        r_cls = "best" if row["RMSE"] == best_rmse else ("worst" if row["RMSE"] == df_models["RMSE"].max() else "")
-        m_cls = "best" if row["MAE"] == best_mae else ""
-        p_cls = "best" if row["MAPE"] == best_mape else ""
-        type_color = "#00d4aa" if row["Type"] == "Deep Learning" else "#ffd93d"
-        rank = ranks[i]
-        stars = "⭐" * max(0, 5 - rank + 1) if rank <= 5 else ""
-        table_html += f"""
-        <tr>
-            <td><b>{row['Model']}</b></td>
-            <td><span style='color:{type_color}; font-size:12px;'>{row['Type']}</span></td>
-            <td class='{r_cls}'>{row['RMSE']}</td>
-            <td class='{m_cls}'>{row['MAE']}</td>
-            <td class='{p_cls}'>{row['MAPE']}%</td>
-            <td style='font-size:13px;'>{stars}</td>
-        </tr>"""
-    table_html += "</tbody></table>"
-
-    st.markdown(f"<div class='card'>{table_html}</div>", unsafe_allow_html=True)
+    display_df = df_models.copy()
+    display_df["MAPE"] = display_df["MAPE"].apply(lambda x: f"{x}%")
+    display_df["Xếp hạng"] = ["⭐" * max(0, 5 - r + 1) if r <= 5 else "" for r in ranks]
+    display_df = display_df.rename(columns={
+        "Model": "Mô hình", "Type": "Loại", "MAPE": "MAPE ↓", "RMSE": "RMSE ↓", "MAE": "MAE ↓"
+    })
+    st.dataframe(
+        display_df[["Mô hình", "Loại", "RMSE ↓", "MAE ↓", "MAPE ↓", "Xếp hạng"]],
+        use_container_width=True,
+        hide_index=True,
+        column_config={
+            "RMSE ↓": st.column_config.NumberColumn(format="%.2f"),
+            "MAE ↓": st.column_config.NumberColumn(format="%.2f"),
+        }
+    )
 
     # Bar charts
     col_r1, col_r2 = st.columns(2)
