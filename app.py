@@ -333,17 +333,24 @@ def load_results():
     ]
     for p in paths:
         if os.path.exists(p):
-            return pd.read_csv(p)
-    # generate demo data
-    dates = pd.date_range("2020-01-31", periods=120, freq="D")
+            df = pd.read_csv(p)
+            if "month" in df.columns and "avg_pm25_actual" in df.columns:
+                df = df.rename(columns={
+                    "month": "Date",
+                    "avg_pm25_actual": "Actual",
+                    "forecast_next_month": "Predicted"
+                })
+                df["Model"] = "Holt-Winters"
+            return df
+    dates = pd.date_range("2015-01", periods=67, freq="MS")
     np.random.seed(42)
-    actual = 50 * np.exp(-np.arange(120) / 80) + 20 + np.random.normal(0, 5, 120)
-    predicted = actual + np.random.normal(0, 6, 120)
+    actual = 100 * np.exp(-np.arange(67) / 50) + 50 + np.random.normal(0, 15, 67)
+    predicted = actual + np.random.normal(0, 20, 67)
     return pd.DataFrame({
-        "Date": dates.strftime("%Y-%m-%d"),
+        "Date": dates.strftime("%Y-%m"),
         "Actual": np.abs(actual),
         "Predicted": np.abs(predicted),
-        "Model": "Stacked LSTM"
+        "Model": "Holt-Winters"
     })
 
 # ─── PLOTLY THEME ──────────────────────────────────────────────
