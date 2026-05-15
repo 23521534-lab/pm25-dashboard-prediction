@@ -577,7 +577,7 @@ with tab2:
             <div class='aqi-display'>
                 <div style='font-size:13px; color:#8b949e; font-family: Space Mono, monospace; text-transform:uppercase; letter-spacing:2px;'>PM2.5 Predicted</div>
                 <div class='aqi-value-big' style='color:{color};'>{avg_pred:.1f}</div>
-                <div style='font-size:14px; color:#8b949e;'>µg/m³ · Ensemble (AR + LSTM)</div>
+                <div style='font-size:14px; color:#8b949e;'>µg/m³ · Ensemble (AR + Holt-Winters)</div>
                 <span class='aqi-label' style='background:rgba(255,255,255,0.05); color:{color}; border:1px solid {color}40; margin-top:12px;'>
                     {icon} {level}
                 </span>
