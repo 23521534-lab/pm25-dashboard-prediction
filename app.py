@@ -485,7 +485,7 @@ with tab1:
     ))
     fig.add_trace(go.Scatter(
         x=df_results["Date"], y=df_results["Predicted_smooth"],
-        mode='lines', name='Predicted (Stacked LSTM)',
+        mode='lines', name='Predicted (Holt-Winters)',
         line=dict(color='#00d4aa', width=2.5),
     ))
 
