@@ -545,7 +545,7 @@ with tab2:
     st.markdown("""
     <div class='info-box'>
         💡 <b>Nhập các chỉ số ô nhiễm hiện tại</b> → Mô hình sẽ dự báo PM2.5 tương ứng.<br>
-        Sử dụng 2 mô hình: <b>AR(3)</b> (thống kê) và <b>Holt-Winters</b> (học sâu) để so sánh kết quả.
+        Sử dụng 2 mô hình: <b>AR(3)</b> (thống kê) và <b>Holt-Winters</b> (thống kê) để so sánh kết quả.
     </div>
     """, unsafe_allow_html=True)
 
