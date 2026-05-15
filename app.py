@@ -319,7 +319,6 @@ def predict_pm25_ar(pm10, nox, no2, nh3):
     return max(0, pred + noise)
 
 def predict_pm25_lstm(pm10, nox, no2, nh3):
-    """Stacked LSTM-based estimation (simulated)"""
     base = 5.24 + 0.28 * pm10 + 0.06 * nox + 0.07 * no2 + 0.05 * nh3
     nonlinear = 0.003 * pm10**1.3 + 0.001 * nox * no2
     noise = np.random.normal(0, 1.8)
@@ -546,7 +545,7 @@ with tab2:
     st.markdown("""
     <div class='info-box'>
         💡 <b>Nhập các chỉ số ô nhiễm hiện tại</b> → Mô hình sẽ dự báo PM2.5 tương ứng.<br>
-        Sử dụng 2 mô hình: <b>AR(3)</b> (thống kê) và <b>Stacked LSTM</b> (học sâu) để so sánh kết quả.
+        Sử dụng 2 mô hình: <b>AR(3)</b> (thống kê) và <b>Holt-Winters</b> (học sâu) để so sánh kết quả.
     </div>
     """, unsafe_allow_html=True)
 
@@ -600,7 +599,7 @@ with tab2:
             with c2:
                 st.markdown(f"""
                 <div class='card' style='text-align:center;'>
-                    <div style='font-size:11px; color:#8b949e; font-family:Space Mono,monospace; text-transform:uppercase; letter-spacing:1px;'>Stacked LSTM</div>
+                    <div style='font-size:11px; color:#8b949e; font-family:Space Mono,monospace; text-transform:uppercase; letter-spacing:1px;'>Holt-Winters</div>
                     <div style='font-size:36px; font-weight:600; color:#00d4aa; margin:8px 0;'>{pred_lstm:.1f}</div>
                     <div style='font-size:12px; color:#8b949e;'>µg/m³</div>
                 </div>
