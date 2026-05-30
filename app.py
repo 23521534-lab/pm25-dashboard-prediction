@@ -370,11 +370,11 @@ PLOTLY_LAYOUT = dict(
 
 # ─── MODEL COMPARISON DATA ─────────────────────────────────────
 model_data = {
-    "Model": ["AR", "SARIMA", "Holt-Winters", "Prophet", "Vanilla LSTM", "Stacked LSTM", "Bi-LSTM", "CNN-LSTM"],
-    "Type": ["Statistical", "Statistical", "Statistical", "Statistical", "Deep Learning", "Deep Learning", "Deep Learning", "Deep Learning"],
-    "RMSE": [7.86, 14.79, 17.42, 50.74, 10.65, 6.65, 7.25, 24.84],
-    "MAE": [5.48, 13.00, 13.83, 34.23, 7.79, 5.24, 10.32, 37.97],
-    "MAPE": [12.85, 36.98, 20.80, 49.55, 19.11, 15.82, 17.69, 88.27],
+    "Model": ["AR", "SARIMA", "Holt-Winters", "Prophet", "Vanilla LSTM", "Stacked LSTM", "Bi-LSTM", "CNN-LSTM", "GRU", "Hybrid"],
+    "Type": ["Statistical", "Statistical", "Statistical", "Statistical", "Deep Learning", "Deep Learning", "Deep Learning", "Deep Learning", "Deep Learning", "Deep Learning"],
+    "RMSE": [7.86, 14.79, 17.42, 50.74, 10.56, 6.65, 7.25, 24.82, 28.87, 30.42],
+    "MAE":  [5.48, 13.00, 13.83, 34.23, 7.79,  5.24, 10.32, 37.97, 14.60, 14.51],
+    "MAPE": [12.85, 36.98, 20.80, 49.55, 19.11, 15.82, 17.69, 88.27, 40.20, 31.35],
 }
 df_models = pd.DataFrame(model_data)
 
