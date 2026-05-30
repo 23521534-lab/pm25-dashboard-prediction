@@ -820,7 +820,7 @@ with tab4:
         <div class='card' style='font-family:Space Mono,monospace; font-size:12px; color:#8b949e; line-height:2;'>
             <span style='color:#00d4aa;'>city_day.csv</span><br>
             &nbsp;&nbsp;&nbsp;↓ Python Producer<br>
-            <span style='color:#ffd93d;'>Apache Kafka</span> (topic: pm25-raw)<br>
+            <span style='color:#ffd93d;'>Apache Kafka</span> (topic: pm25-topic)<br>
             &nbsp;&nbsp;&nbsp;↓ Spark Streaming<br>
             <span style='color:#ff9f43;'>Apache Spark</span> (aggregate theo tháng)<br>
             &nbsp;&nbsp;&nbsp;↓ Load model<br>
