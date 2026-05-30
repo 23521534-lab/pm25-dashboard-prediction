@@ -662,7 +662,7 @@ with tab3:
     ranks = df_models["RMSE"].rank().astype(int).tolist()
     display_df = df_models.copy()
     display_df["MAPE"] = display_df["MAPE"].apply(lambda x: f"{x}%")
-    display_df["Xếp hạng"] = ["⭐" * max(0, 5 - r + 1) if r <= 5 else "" for r in ranks]
+    display_df["Xếp hạng"] = ["⭐" * max(0, 6 - r + 1) if r <= 6 else "" for r in ranks]
     display_df = display_df.rename(columns={
         "Model": "Mô hình", "Type": "Loại", "MAPE": "MAPE ↓", "RMSE": "RMSE ↓", "MAE": "MAE ↓"
     })
