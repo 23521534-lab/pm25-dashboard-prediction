@@ -537,6 +537,16 @@ with tab1:
         display_df["Actual"] = display_df["Actual"].round(2)
         display_df["Predicted"] = display_df["Predicted"].round(2)
         st.dataframe(display_df[["Date", "Actual", "Predicted", "Error"]], use_container_width=True)
+        st.markdown("""
+        <div class='info-box'>
+            💡 <b>Lý do chọn Holt-Winters cho pipeline (thay vì Stacked LSTM):</b><br>
+            Mặc dù Stacked LSTM đạt RMSE thấp nhất (6.65) trong điều kiện train/test tĩnh, 
+            mô hình này không phù hợp cho môi trường Spark Streaming vì cần GPU và thời gian 
+            re-train lâu trên mỗi micro-batch. Holt-Winters nhẹ hơn, train lại được ngay 
+            trong vài mili-giây trên từng batch dữ liệu mới — phù hợp với yêu cầu xử lý 
+            thời gian thực của pipeline.
+        </div>
+        """, unsafe_allow_html=True)
 
 # ══════════════════════════════════════════════════════════════
 # TAB 2 — REAL-TIME PREDICTION
@@ -662,7 +672,7 @@ with tab3:
     ranks = df_models["RMSE"].rank().astype(int).tolist()
     display_df = df_models.copy()
     display_df["MAPE"] = display_df["MAPE"].apply(lambda x: f"{x}%")
-    display_df["Xếp hạng"] = ["⭐" * max(0, 6 - r + 1) if r <= 6 else "" for r in ranks]
+    display_df["Xếp hạng"] = ["🏆 Tốt nhất" if v == best_rmse else "" for v in df_models["RMSE"]]
     display_df = display_df.rename(columns={
         "Model": "Mô hình", "Type": "Loại", "MAPE": "MAPE ↓", "RMSE": "RMSE ↓", "MAE": "MAE ↓"
     })
