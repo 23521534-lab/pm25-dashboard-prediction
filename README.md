@@ -7,7 +7,7 @@ Dashboard trực quan hóa kết quả dự báo PM2.5 sử dụng các mô hìn
 
 - **Kết quả Pipeline**: Biểu đồ Actual vs Predicted từ Spark output, các chỉ số RMSE/MAE/MAPE
 - **Dự báo Real-time**: Nhập PM10, NOx, NO2, NH3 → dự báo PM2.5 bằng AR(3) và Stacked LSTM
-- **So sánh Mô hình**: So sánh 8 mô hình (AR, SARIMA, Holt-Winters, Prophet, LSTM variants)
+- **So sánh Mô hình**: So sánh 10 mô hình (AR, SARIMA, Holt-Winters, Prophet, Vanilla LSTM, Stacked LSTM, Bi-LSTM, CNN-LSTM, GRU, Hybrid)
 - **Thông tin Dataset**: Mô tả dataset, phân chia train/test, kiến trúc pipeline
 
 ## Dataset
