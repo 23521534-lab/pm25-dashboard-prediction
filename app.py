@@ -23,15 +23,15 @@ st.markdown("""
     @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap');
 
     :root {
-        --bg: #0d1117;
-        --surface: #161b22;
-        --surface2: #21262d;
-        --border: #30363d;
-        --accent: #00d4aa;
-        --accent2: #ff6b6b;
-        --accent3: #ffd93d;
-        --text: #e6edf3;
-        --text-muted: #8b949e;
+        --bg: #f5f7fa;
+        --surface: #ffffff;
+        --surface2: #eef1f5;
+        --border: #d0d7de;
+        --accent: #0077b6;
+        --accent2: #e63946;
+        --accent3: #f4a261;
+        --text: #1a1a2e;
+        --text-muted: #57606a;
     }
 
     .stApp {
@@ -57,7 +57,7 @@ st.markdown("""
 
     /* Main header */
     .main-header {
-        background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
+        background: linear-gradient(135deg, #ffffff 0%, #eef1f5 50%, #ffffff 100%);
         border: 1px solid var(--border);
         border-radius: 16px;
         padding: 32px 40px;
@@ -356,13 +356,13 @@ def load_results():
 PLOTLY_LAYOUT = dict(
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(0,0,0,0)",
-    font=dict(family="DM Sans", color="#8b949e", size=12),
-    xaxis=dict(gridcolor="#21262d", linecolor="#30363d", tickcolor="#30363d"),
-    yaxis=dict(gridcolor="#21262d", linecolor="#30363d", tickcolor="#30363d"),
+    font=dict(family="DM Sans", color="#57606a", size=12),
+    xaxis=dict(gridcolor="#d0d7de", linecolor="#d0d7de", tickcolor="#d0d7de"),
+    yaxis=dict(gridcolor="#d0d7de", linecolor="#d0d7de", tickcolor="#d0d7de"),
     margin=dict(l=10, r=10, t=30, b=10),
     legend=dict(
-        bgcolor="rgba(22,27,34,0.9)",
-        bordercolor="#30363d",
+        bgcolor="rgba(255,255,255,0.9)",
+        bordercolor="#d0d7de",
         borderwidth=1,
         font=dict(size=12)
     )
@@ -381,9 +381,9 @@ df_models = pd.DataFrame(model_data)
 # ─── SIDEBAR ───────────────────────────────────────────────────
 with st.sidebar:
     st.markdown("""
-    <div style='padding: 16px 0 24px 0; border-bottom: 1px solid #30363d; margin-bottom: 20px;'>
-        <div style='font-family: Space Mono, monospace; font-size: 15px; font-weight: 700; color: #e6edf3;'>🌫️ PM2.5 Dashboard</div>
-        <div style='font-size: 12px; color: #8b949e; margin-top: 4px;'>IE212 · Nhóm 6</div>
+    <div style='padding: 16px 0 24px 0; border-bottom: 1px solid #d0d7de; margin-bottom: 20px;'>
+        <div style='font-family: Space Mono, monospace; font-size: 15px; font-weight: 700; color: #1a1a2e;'>🌫️ PM2.5 Dashboard</div>
+        <div style='font-size: 12px; color: #57606a; margin-top: 4px;'>IE212 · Nhóm 6</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -397,12 +397,12 @@ with st.sidebar:
 
     st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
     st.markdown("""
-    <div style='background:#161b22; border:1px solid #30363d; border-radius:10px; padding:14px; font-size:12px; color:#8b949e; line-height:1.7;'>
-        <b style='color:#e6edf3;'>Dataset:</b> Air Quality India (Kaggle)<br>
-        <b style='color:#e6edf3;'>Train:</b> 2015–2019 (1,607 ngày)<br>
-        <b style='color:#e6edf3;'>Test:</b> 2020 (153 ngày)<br>
-        <b style='color:#e6edf3;'>Target:</b> PM2.5 (µg/m³)<br>
-        <b style='color:#e6edf3;'>Pipeline:</b> Kafka → Spark → Model
+    <div style='background:#eef1f5; border:1px solid #d0d7de; border-radius:10px; padding:14px; font-size:12px; color:#57606a; line-height:1.7;'>
+        <b style='color:#1a1a2e;'>Dataset:</b> Air Quality India (Kaggle)<br>
+        <b style='color:#1a1a2e;'>Train:</b> 2015–2019 (1,607 ngày)<br>
+        <b style='color:#1a1a2e;'>Test:</b> 2020 (153 ngày)<br>
+        <b style='color:#1a1a2e;'>Target:</b> PM2.5 (µg/m³)<br>
+        <b style='color:#1a1a2e;'>Pipeline:</b> Kafka → Spark → Model
     </div>
     """, unsafe_allow_html=True)
 
@@ -480,7 +480,7 @@ with tab1:
     fig.add_trace(go.Scatter(
         x=df_results["Date"], y=df_results["Actual"],
         mode='lines', name='Actual PM2.5',
-        line=dict(color='#e6edf3', width=1.5, dash='dot'),
+        line=dict(color='#1a1a2e', width=1.5, dash='dot'),
     ))
     fig.add_trace(go.Scatter(
         x=df_results["Date"], y=df_results["Predicted_smooth"],
@@ -502,7 +502,7 @@ with tab1:
         st.markdown("<div class='section-title'>Residuals theo thời gian</div>", unsafe_allow_html=True)
         residuals = df_results["Actual"] - df_results["Predicted"]
         fig2 = go.Figure()
-        fig2.add_hline(y=0, line_dash="dash", line_color="#30363d")
+        fig2.add_hline(y=0, line_dash="dash", line_color="#d0d7de")
         fig2.add_trace(go.Scatter(
             x=df_results["Date"], y=residuals,
             mode='lines',
@@ -519,8 +519,8 @@ with tab1:
         fig3 = go.Figure()
         fig3.add_trace(go.Histogram(
             x=residuals, nbinsx=25,
-            marker_color='#ff6b6b',
-            marker_line_color='#0d1117',
+            marker_color='#e63946',
+            marker_line_color='#ffffff',
             marker_line_width=1,
             opacity=0.8,
             name='Error Distribution'
@@ -613,13 +613,13 @@ with tab2:
         fig_gauge = go.Figure(go.Indicator(
             mode="gauge+number+delta",
             value=avg_pred,
-            number={"suffix": " µg/m³", "font": {"size": 28, "color": "#e6edf3"}},
+            number={"suffix": " µg/m³", "font": {"size": 28, "color": "#1a1a2e"}},
             delta={"reference": 35.4, "valueformat": ".1f"},
             gauge={
-                "axis": {"range": [0, 250], "tickcolor": "#8b949e", "tickfont": {"color": "#8b949e"}},
+                "axis": {"range": [0, 250], "tickcolor": "#57606a", "tickfont": {"color": "#57606a"}},
                 "bar": {"color": color, "thickness": 0.25},
-                "bgcolor": "#161b22",
-                "bordercolor": "#30363d",
+                "bgcolor": "#eef1f5",
+                "bordercolor": "#d0d7de",
                 "steps": [
                     {"range": [0, 12], "color": "rgba(0,212,170,0.2)"},
                     {"range": [12, 35.4], "color": "rgba(255,217,61,0.2)"},
@@ -647,8 +647,8 @@ with tab2:
         }
         rec_text, rec_color = rec_map.get(level, ("", "#8b949e"))
         st.markdown(f"""
-        <div style='background:rgba(0,0,0,0.2); border:1px solid {rec_color}40; border-left: 3px solid {rec_color};
-                    border-radius:10px; padding:14px 20px; font-size:14px; color:#e6edf3; margin-top:8px;'>
+        <div style='background:rgba(0,0,0,0.04); border:1px solid {rec_color}40; border-left: 3px solid {rec_color};
+                    border-radius:10px; padding:14px 20px; font-size:14px; color:#1a1a2e; margin-top:8px;'>
             {rec_text}
         </div>
         """, unsafe_allow_html=True)
@@ -695,16 +695,16 @@ with tab3:
     col_r1, col_r2 = st.columns(2)
     with col_r1:
         st.markdown("<div class='section-title'>RMSE theo mô hình</div>", unsafe_allow_html=True)
-        colors = ["#00d4aa" if v == best_rmse else "#ff6b6b" if v == df_models["RMSE"].max() else "#30363d"
+        colors = ["#0077b6" if v == best_rmse else "#e63946" if v == df_models["RMSE"].max() else "#d0d7de"
                   for v in df_models["RMSE"]]
         fig_bar = go.Figure(go.Bar(
             x=df_models["Model"], y=df_models["RMSE"],
             marker_color=colors,
-            marker_line_color="#0d1117",
+            marker_line_color="#ffffff",
             marker_line_width=1,
             text=df_models["RMSE"].round(2),
             textposition="outside",
-            textfont=dict(color="#8b949e", size=11)
+            textfont=dict(color="#57606a", size=11)
         ))
         fig_bar.update_layout(**PLOTLY_LAYOUT, height=280,
                               yaxis_title="RMSE (µg/m³)",
@@ -713,16 +713,16 @@ with tab3:
 
     with col_r2:
         st.markdown("<div class='section-title'>MAPE theo mô hình</div>", unsafe_allow_html=True)
-        colors2 = ["#00d4aa" if v == best_mape else "#ff6b6b" if v == df_models["MAPE"].max() else "#30363d"
+        colors2 = ["#0077b6" if v == best_mape else "#e63946" if v == df_models["MAPE"].max() else "#d0d7de"
                    for v in df_models["MAPE"]]
         fig_bar2 = go.Figure(go.Bar(
             x=df_models["Model"], y=df_models["MAPE"],
             marker_color=colors2,
-            marker_line_color="#0d1117",
+            marker_line_color="#ffffff",
             marker_line_width=1,
             text=[f"{v}%" for v in df_models["MAPE"]],
             textposition="outside",
-            textfont=dict(color="#8b949e", size=11)
+            textfont=dict(color="#57606a", size=11)
         ))
         fig_bar2.update_layout(**PLOTLY_LAYOUT, height=280,
                                yaxis_title="MAPE (%)",
@@ -753,9 +753,9 @@ with tab3:
         **PLOTLY_LAYOUT,
         height=350,
         polar=dict(
-            bgcolor="#161b22",
-            radialaxis=dict(visible=True, range=[0, 100], gridcolor="#30363d", tickcolor="#30363d"),
-            angularaxis=dict(gridcolor="#30363d")
+            bgcolor="#eef1f5",
+            radialaxis=dict(visible=True, range=[0, 100], gridcolor="#d0d7de", tickcolor="#d0d7de"),
+            angularaxis=dict(gridcolor="#d0d7de")
         )
     )
     st.plotly_chart(fig_radar, use_container_width=True)
@@ -771,13 +771,13 @@ with tab4:
         st.markdown("""
         <div class='card'>
             <table style='width:100%; font-size:14px; border-collapse:collapse;'>
-                <tr><td style='color:#8b949e; padding:8px 0; border-bottom:1px solid #21262d;'>Tên dataset</td><td style='color:#e6edf3; padding:8px 0; border-bottom:1px solid #21262d; text-align:right;'><b>Air Quality India</b></td></tr>
-                <tr><td style='color:#8b949e; padding:8px 0; border-bottom:1px solid #21262d;'>Nguồn</td><td style='color:#00d4aa; padding:8px 0; border-bottom:1px solid #21262d; text-align:right;'>Kaggle</td></tr>
-                <tr><td style='color:#8b949e; padding:8px 0; border-bottom:1px solid #21262d;'>Số dòng</td><td style='color:#e6edf3; padding:8px 0; border-bottom:1px solid #21262d; text-align:right;'><b>29,531 dòng</b></td></tr>
-                <tr><td style='color:#8b949e; padding:8px 0; border-bottom:1px solid #21262d;'>Số cột</td><td style='color:#e6edf3; padding:8px 0; border-bottom:1px solid #21262d; text-align:right;'><b>16 features</b></td></tr>
-                <tr><td style='color:#8b949e; padding:8px 0; border-bottom:1px solid #21262d;'>Thời gian</td><td style='color:#e6edf3; padding:8px 0; border-bottom:1px solid #21262d; text-align:right;'>2015 – 2020</td></tr>
-                <tr><td style='color:#8b949e; padding:8px 0; border-bottom:1px solid #21262d;'>Số thành phố</td><td style='color:#e6edf3; padding:8px 0; border-bottom:1px solid #21262d; text-align:right;'>26 thành phố</td></tr>
-                <tr><td style='color:#8b949e; padding:8px 0;'>Tần suất</td><td style='color:#e6edf3; padding:8px 0; text-align:right;'>Hàng ngày</td></tr>
+                <tr><td style='color:#57606a; padding:8px 0; border-bottom:1px solid #eef1f5;'>Tên dataset</td><td style='color:#1a1a2e; padding:8px 0; border-bottom:1px solid #eef1f5; text-align:right;'><b>Air Quality India</b></td></tr>
+                <tr><td style='color:#57606a; padding:8px 0; border-bottom:1px solid #eef1f5;'>Nguồn</td><td style='color:#0077b6; padding:8px 0; border-bottom:1px solid #eef1f5; text-align:right;'>Kaggle</td></tr>
+                <tr><td style='color:#57606a; padding:8px 0; border-bottom:1px solid #eef1f5;'>Số dòng</td><td style='color:#1a1a2e; padding:8px 0; border-bottom:1px solid #eef1f5; text-align:right;'><b>29,531 dòng</b></td></tr>
+                <tr><td style='color:#57606a; padding:8px 0; border-bottom:1px solid #eef1f5;'>Số cột</td><td style='color:#1a1a2e; padding:8px 0; border-bottom:1px solid #eef1f5; text-align:right;'><b>16 features</b></td></tr>
+                <tr><td style='color:#57606a; padding:8px 0; border-bottom:1px solid #eef1f5;'>Thời gian</td><td style='color:#1a1a2e; padding:8px 0; border-bottom:1px solid #eef1f5; text-align:right;'>2015 – 2020</td></tr>
+                <tr><td style='color:#57606a; padding:8px 0; border-bottom:1px solid #eef1f5;'>Số thành phố</td><td style='color:#1a1a2e; padding:8px 0; border-bottom:1px solid #eef1f5; text-align:right;'>26 thành phố</td></tr>
+                <tr><td style='color:#57606a; padding:8px 0;'>Tần suất</td><td style='color:#1a1a2e; padding:8px 0; text-align:right;'>Hàng ngày</td></tr>
             </table>
         </div>
         """, unsafe_allow_html=True)
@@ -786,15 +786,15 @@ with tab4:
         st.markdown("""
         <div class='card'>
             <div style='display:grid; grid-template-columns:1fr 1fr; gap:16px;'>
-                <div style='text-align:center; padding:16px; background:#21262d; border-radius:8px;'>
-                    <div style='font-size:11px; color:#8b949e; font-family:Space Mono,monospace; text-transform:uppercase;'>TRAIN</div>
-                    <div style='font-size:28px; font-weight:600; color:#00d4aa; margin:8px 0;'>80%</div>
-                    <div style='font-size:12px; color:#8b949e;'>2015 – 2019<br>1,607 mẫu</div>
+                <div style='text-align:center; padding:16px; background:#eef1f5; border-radius:8px;'>
+                    <div style='font-size:11px; color:#57606a; font-family:Space Mono,monospace; text-transform:uppercase;'>TRAIN</div>
+                    <div style='font-size:28px; font-weight:600; color:#0077b6; margin:8px 0;'>80%</div>
+                    <div style='font-size:12px; color:#57606a;'>2015 – 2019<br>1,607 mẫu</div>
                 </div>
-                <div style='text-align:center; padding:16px; background:#21262d; border-radius:8px;'>
-                    <div style='font-size:11px; color:#8b949e; font-family:Space Mono,monospace; text-transform:uppercase;'>TEST</div>
-                    <div style='font-size:28px; font-weight:600; color:#ff6b6b; margin:8px 0;'>20%</div>
-                    <div style='font-size:12px; color:#8b949e;'>2020<br>153 mẫu</div>
+                <div style='text-align:center; padding:16px; background:#eef1f5; border-radius:8px;'>
+                    <div style='font-size:11px; color:#57606a; font-family:Space Mono,monospace; text-transform:uppercase;'>TEST</div>
+                    <div style='font-size:28px; font-weight:600; color:#e63946; margin:8px 0;'>20%</div>
+                    <div style='font-size:12px; color:#57606a;'>2020<br>153 mẫu</div>
                 </div>
             </div>
         </div>
@@ -817,10 +817,10 @@ with tab4:
         for feat, (desc, col) in features.items():
             st.markdown(f"""
             <div style='display:flex; justify-content:space-between; align-items:center;
-                        padding:9px 0; border-bottom:1px solid #21262d;'>
+                        padding:9px 0; border-bottom:1px solid #eef1f5;'>
                 <div>
                     <span style='font-family:Space Mono,monospace; font-size:12px; color:{col};'>{feat}</span>
-                    <div style='font-size:11px; color:#8b949e; margin-top:2px;'>{desc}</div>
+                    <div style='font-size:11px; color:#57606a; margin-top:2px;'>{desc}</div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -828,16 +828,16 @@ with tab4:
 
         st.markdown("<div class='section-title'>Pipeline Architecture</div>", unsafe_allow_html=True)
         st.markdown("""
-        <div class='card' style='font-family:Space Mono,monospace; font-size:12px; color:#8b949e; line-height:2;'>
-            <span style='color:#00d4aa;'>city_day.csv</span><br>
+        <div class='card' style='font-family:Space Mono,monospace; font-size:12px; color:#57606a; line-height:2;'>
+            <span style='color:#0077b6;'>city_day.csv</span><br>
             &nbsp;&nbsp;&nbsp;↓ Python Producer<br>
-            <span style='color:#ffd93d;'>Apache Kafka</span> (topic: pm25-topic)<br>
+            <span style='color:#f4a261;'>Apache Kafka</span> (topic: pm25-topic)<br>
             &nbsp;&nbsp;&nbsp;↓ Spark Streaming<br>
-            <span style='color:#ff9f43;'>Apache Spark</span> (aggregate theo tháng)<br>
+            <span style='color:#e63946;'>Apache Spark</span> (aggregate theo tháng)<br>
             &nbsp;&nbsp;&nbsp;↓ Load model<br>
-            <span style='color:#a855f7;'>Holt-Winters / LSTM</span><br>
+            <span style='color:#9b5de5;'>Holt-Winters / LSTM</span><br>
             &nbsp;&nbsp;&nbsp;↓ Save results<br>
-            <span style='color:#00d4aa;'>output/results.csv</span>
+            <span style='color:#0077b6;'>output/results.csv</span>
         </div>
         """, unsafe_allow_html=True)
 
@@ -847,18 +847,18 @@ with tab4:
     with col_m1:
         st.markdown("""
         <div class='card' style='text-align:center;'>
-            <div style='font-size:28px; color:#ff6b6b; font-weight:600;'>15.6%</div>
-            <div style='font-size:12px; color:#8b949e; margin-top:6px;'>PM2.5 missing rate</div>
+            <div style='font-size:28px; color:#e63946; font-weight:600;'>15.6%</div>
+            <div style='font-size:12px; color:#57606a; margin-top:6px;'>PM2.5 missing rate</div>
         </div>""", unsafe_allow_html=True)
     with col_m2:
         st.markdown("""
         <div class='card' style='text-align:center;'>
-            <div style='font-size:28px; color:#ffd93d; font-weight:600;'>Linear</div>
-            <div style='font-size:12px; color:#8b949e; margin-top:6px;'>Interpolation method</div>
+            <div style='font-size:28px; color:#f4a261; font-weight:600;'>Linear</div>
+            <div style='font-size:12px; color:#57606a; margin-top:6px;'>Interpolation method</div>
         </div>""", unsafe_allow_html=True)
     with col_m3:
         st.markdown("""
         <div class='card' style='text-align:center;'>
-            <div style='font-size:28px; color:#00d4aa; font-weight:600;'>MICE</div>
-            <div style='font-size:12px; color:#8b949e; margin-top:6px;'>Multivariate imputation</div>
+            <div style='font-size:28px; color:#0077b6; font-weight:600;'>MICE</div>
+            <div style='font-size:12px; color:#57606a; margin-top:6px;'>Multivariate imputation</div>
         </div>""", unsafe_allow_html=True)
