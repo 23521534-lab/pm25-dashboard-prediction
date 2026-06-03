@@ -251,8 +251,8 @@ st.markdown("""
 
     /* Streamlit overrides */
     .stButton > button {
-        background: linear-gradient(135deg, var(--accent), #00b894);
-        color: #0d1117;
+        background: linear-gradient(135deg, #0077b6, #005f8e);
+        color: #ffffff;
         border: none;
         border-radius: 8px;
         font-family: 'Space Mono', monospace;
@@ -268,10 +268,10 @@ st.markdown("""
 
     div[data-testid="stNumberInput"] input,
     div[data-testid="stTextInput"] input {
-        background: var(--surface2) !important;
-        border: 1px solid var(--border) !important;
+        background: #eef1f5 !important;
+        border: 1px solid #d0d7de !important;
         border-radius: 8px !important;
-        color: var(--text) !important;
+        color: #1a1a2e !important;
     }
 
     .info-box {
@@ -285,8 +285,8 @@ st.markdown("""
         line-height: 1.6;
     }
     .warn-box {
-        background: rgba(255, 107, 107, 0.08);
-        border: 1px solid rgba(255, 107, 107, 0.25);
+        background: rgba(230, 57, 70, 0.08);
+        border: 1px solid rgba(230, 57, 70, 0.25);
         border-radius: 10px;
         padding: 16px 20px;
         margin: 12px 0;
@@ -294,6 +294,29 @@ st.markdown("""
         color: var(--text-muted);
         line-height: 1.6;
     }
+
+    /* Force Streamlit dataframe/table sang light */
+    [data-testid="stDataFrame"] * {
+        color: #1a1a2e !important;
+        background-color: transparent !important;
+    }
+    [data-testid="stDataFrame"] iframe {
+        filter: invert(0%) !important;
+    }
+    .stDataFrame { background: #ffffff; }
+
+    /* Streamlit metric label và value */
+    [data-testid="stMetricLabel"] { color: #57606a !important; }
+    [data-testid="stMetricValue"] { color: #1a1a2e !important; }
+    [data-testid="stMetricDelta"] { color: #57606a !important; }
+
+    /* Slider, checkbox text */
+    .stSlider label, .stCheckbox label { color: #1a1a2e !important; }
+    .stMarkdown p, .stMarkdown b { color: #1a1a2e; }
+
+    /* Expander */
+    .streamlit-expanderHeader { color: #1a1a2e !important; }
+    [data-testid="stExpander"] { border-color: #d0d7de !important; }
 </style>
 """, unsafe_allow_html=True)
 
@@ -575,10 +598,10 @@ with tab2:
 
             st.markdown(f"""
             <div class='aqi-display'>
-                <div style='font-size:13px; color:#8b949e; font-family: Space Mono, monospace; text-transform:uppercase; letter-spacing:2px;'>PM2.5 Predicted</div>
+                <div style='font-size:13px; color:#57606a; font-family: Space Mono, monospace; text-transform:uppercase; letter-spacing:2px;'>PM2.5 Predicted</div>
                 <div class='aqi-value-big' style='color:{color};'>{avg_pred:.1f}</div>
-                <div style='font-size:14px; color:#8b949e;'>µg/m³ · Ensemble (AR + Holt-Winters)</div>
-                <span class='aqi-label' style='background:rgba(255,255,255,0.05); color:{color}; border:1px solid {color}40; margin-top:12px;'>
+                <div style='font-size:14px; color:#57606a;'>µg/m³ · Ensemble (AR + Holt-Winters)</div>
+                <span class='aqi-label' style='background:rgba(0,0,0,0.05); color:{color}; border:1px solid {color}40; margin-top:12px;'>
                     {icon} {level}
                 </span>
             </div>
@@ -591,17 +614,17 @@ with tab2:
             with c1:
                 st.markdown(f"""
                 <div class='card' style='text-align:center;'>
-                    <div style='font-size:11px; color:#8b949e; font-family:Space Mono,monospace; text-transform:uppercase; letter-spacing:1px;'>AR(3)</div>
-                    <div style='font-size:36px; font-weight:600; color:#ffd93d; margin:8px 0;'>{pred_ar:.1f}</div>
-                    <div style='font-size:12px; color:#8b949e;'>µg/m³</div>
+                    <div style='font-size:11px; color:#57606a; font-family:Space Mono,monospace; text-transform:uppercase; letter-spacing:1px;'>AR(3)</div>
+                    <div style='font-size:36px; font-weight:600; color:#f4a261; margin:8px 0;'>{pred_ar:.1f}</div>
+                    <div style='font-size:12px; color:#57606a;'>µg/m³</div>
                 </div>
                 """, unsafe_allow_html=True)
             with c2:
                 st.markdown(f"""
                 <div class='card' style='text-align:center;'>
-                    <div style='font-size:11px; color:#8b949e; font-family:Space Mono,monospace; text-transform:uppercase; letter-spacing:1px;'>Holt-Winters</div>
-                    <div style='font-size:36px; font-weight:600; color:#00d4aa; margin:8px 0;'>{pred_lstm:.1f}</div>
-                    <div style='font-size:12px; color:#8b949e;'>µg/m³</div>
+                    <div style='font-size:11px; color:#57606a; font-family:Space Mono,monospace; text-transform:uppercase; letter-spacing:1px;'>Holt-Winters</div>
+                    <div style='font-size:36px; font-weight:600; color:#0077b6; margin:8px 0;'>{pred_lstm:.1f}</div>
+                    <div style='font-size:12px; color:#57606a;'>µg/m³</div>
                 </div>
                 """, unsafe_allow_html=True)
 
@@ -645,7 +668,7 @@ with tab2:
             "Rất không lành mạnh": ("🚫 Nguy hiểm! Tuyệt đối không ra ngoài.", "#a855f7"),
             "Nguy hiểm": ("☠️ Tình trạng khẩn cấp về sức khỏe.", "#6b0000"),
         }
-        rec_text, rec_color = rec_map.get(level, ("", "#8b949e"))
+        rec_text, rec_color = rec_map.get(level, ("", "#57606a"))
         st.markdown(f"""
         <div style='background:rgba(0,0,0,0.04); border:1px solid {rec_color}40; border-left: 3px solid {rec_color};
                     border-radius:10px; padding:14px 20px; font-size:14px; color:#1a1a2e; margin-top:8px;'>
