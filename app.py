@@ -524,11 +524,16 @@ with tab1:
     ))
 
     fig.update_layout(
-        **PLOTLY_LAYOUT,
-        height=360,
-        hovermode='x unified',
-        yaxis_title="PM2.5 (µg/m³)",
-    )
+    **PLOTLY_LAYOUT,
+    height=360,
+    hovermode='x unified',
+    yaxis=dict(
+        title=dict(
+            text="PM2.5 (µg/m³)",
+            font=dict(color="#1a1a2e")  # ← thêm dòng này
+        )
+    ),
+)
     st.plotly_chart(fig, use_container_width=True)
 
     # Residuals + Distribution
