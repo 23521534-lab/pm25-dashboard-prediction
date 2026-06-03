@@ -528,15 +528,6 @@ with tab1:
         height=360,
         hovermode='x unified',
         yaxis_title="PM2.5 (µg/m³)",
-        xaxis=dict(
-            gridcolor="#e0e4ea", linecolor="#d0d7de",
-            tickcolor="#1a1a2e", tickfont=dict(color="#1a1a2e")
-        ),
-        yaxis=dict(
-            gridcolor="#e0e4ea", linecolor="#d0d7de",
-            tickcolor="#1a1a2e", tickfont=dict(color="#1a1a2e"),
-            title_font=dict(color="#1a1a2e")
-        ),
     )
     st.plotly_chart(fig, use_container_width=True)
 
@@ -556,17 +547,9 @@ with tab1:
             name='Residual'
         ))
         fig2.update_layout(
-            **PLOTLY_LAYOUT, height=240,
+            **PLOTLY_LAYOUT,
+            height=240,
             yaxis_title="Error (µg/m³)",
-            yaxis=dict(
-                gridcolor="#e0e4ea", linecolor="#d0d7de",
-                tickcolor="#1a1a2e", tickfont=dict(color="#1a1a2e"),
-                title_font=dict(color="#1a1a2e")
-            ),
-            xaxis=dict(
-                gridcolor="#e0e4ea", linecolor="#d0d7de",
-                tickcolor="#1a1a2e", tickfont=dict(color="#1a1a2e")
-            )
         )
         st.plotly_chart(fig2, use_container_width=True)
 
@@ -582,18 +565,10 @@ with tab1:
             name='Error Distribution'
         ))
         fig3.update_layout(
-            **PLOTLY_LAYOUT, height=240,
-            xaxis_title="Error (µg/m³)", yaxis_title="Count",
-            xaxis=dict(
-                gridcolor="#e0e4ea", linecolor="#d0d7de",
-                tickcolor="#1a1a2e", tickfont=dict(color="#1a1a2e"),
-                title_font=dict(color="#1a1a2e")
-            ),
-            yaxis=dict(
-                gridcolor="#e0e4ea", linecolor="#d0d7de",
-                tickcolor="#1a1a2e", tickfont=dict(color="#1a1a2e"),
-                title_font=dict(color="#1a1a2e")
-            )
+            **PLOTLY_LAYOUT,
+            height=240,
+            xaxis_title="Error (µg/m³)",
+            yaxis_title="Count",
         )
         st.plotly_chart(fig3, use_container_width=True)
 
@@ -699,9 +674,11 @@ with tab2:
             }
         ))
         fig_gauge.update_layout(
-            **PLOTLY_LAYOUT,
+            paper_bgcolor="#ffffff",
+            plot_bgcolor="#f5f7fa",
+            font=dict(family="DM Sans", color="#1a1a2e", size=12),
+            margin=dict(l=10, r=10, t=30, b=10),
             height=250,
-            font=dict(color="#1a1a2e"),
         )
         st.plotly_chart(fig_gauge, use_container_width=True)
 
@@ -776,17 +753,10 @@ with tab3:
             textfont=dict(color="#57606a", size=11)
         ))
         fig_bar.update_layout(
-            **PLOTLY_LAYOUT, height=280,
+            **PLOTLY_LAYOUT,
+            height=280,
             yaxis_title="RMSE (µg/m³)",
             xaxis_tickangle=-30,
-            xaxis=dict(
-                tickfont=dict(color="#1a1a2e", size=11),
-                title_font=dict(color="#1a1a2e")
-            ),
-            yaxis=dict(
-                tickfont=dict(color="#1a1a2e"),
-                title_font=dict(color="#1a1a2e")
-            )
         )
         st.plotly_chart(fig_bar, use_container_width=True)
 
@@ -804,17 +774,10 @@ with tab3:
             textfont=dict(color="#57606a", size=11)
         ))
         fig_bar2.update_layout(
-            **PLOTLY_LAYOUT, height=280,
+            **PLOTLY_LAYOUT,
+            height=280,
             yaxis_title="MAPE (%)",
             xaxis_tickangle=-30,
-            xaxis=dict(
-                tickfont=dict(color="#1a1a2e", size=11),
-                title_font=dict(color="#1a1a2e")
-            ),
-            yaxis=dict(
-                tickfont=dict(color="#1a1a2e"),
-                title_font=dict(color="#1a1a2e")
-            )
         )
         st.plotly_chart(fig_bar2, use_container_width=True)
 
@@ -839,9 +802,17 @@ with tab3:
             fillcolor=f"rgba({int(colors_radar[idx][1:3],16)},{int(colors_radar[idx][3:5],16)},{int(colors_radar[idx][5:7],16)},0.1)"
         ))
     fig_radar.update_layout(
-        **PLOTLY_LAYOUT,
+        paper_bgcolor="#ffffff",
+        plot_bgcolor="#f5f7fa",
+        font=dict(family="DM Sans", color="#1a1a2e", size=12),
+        margin=dict(l=10, r=10, t=30, b=10),
+        legend=dict(
+            bgcolor="rgba(255,255,255,0.95)",
+            bordercolor="#d0d7de",
+            borderwidth=1,
+            font=dict(size=12, color="#1a1a2e")
+        ),
         height=350,
-        font=dict(color="#1a1a2e", size=12),
         polar=dict(
             bgcolor="#eef1f5",
             radialaxis=dict(
