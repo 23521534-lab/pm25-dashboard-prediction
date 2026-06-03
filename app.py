@@ -380,20 +380,6 @@ PLOTLY_LAYOUT = dict(
     paper_bgcolor="#ffffff",
     plot_bgcolor="#f5f7fa",
     font=dict(family="DM Sans", color="#1a1a2e", size=12),
-    xaxis=dict(
-        gridcolor="#e0e4ea",
-        linecolor="#d0d7de",
-        tickcolor="#1a1a2e",
-        tickfont=dict(color="#1a1a2e", size=11),
-        title_font=dict(color="#1a1a2e"),
-    ),
-    yaxis=dict(
-        gridcolor="#e0e4ea",
-        linecolor="#d0d7de",
-        tickcolor="#1a1a2e",
-        tickfont=dict(color="#1a1a2e", size=11),
-        title_font=dict(color="#1a1a2e"),
-    ),
     margin=dict(l=10, r=10, t=30, b=10),
     legend=dict(
         bgcolor="rgba(255,255,255,0.95)",
@@ -401,6 +387,15 @@ PLOTLY_LAYOUT = dict(
         borderwidth=1,
         font=dict(size=12, color="#1a1a2e")
     )
+)
+
+# Dùng chung cho mọi chart khi cần set axis
+AXIS_STYLE = dict(
+    gridcolor="#e0e4ea",
+    linecolor="#d0d7de",
+    tickcolor="#1a1a2e",
+    tickfont=dict(color="#1a1a2e", size=11),
+    title_font=dict(color="#1a1a2e"),
 )
 
 # ─── MODEL COMPARISON DATA ─────────────────────────────────────
@@ -524,16 +519,12 @@ with tab1:
     ))
 
     fig.update_layout(
-    **PLOTLY_LAYOUT,
-    height=360,
-    hovermode='x unified',
-    yaxis=dict(
-        title=dict(
-            text="PM2.5 (µg/m³)",
-            font=dict(color="#1a1a2e")  # ← thêm dòng này
-        )
-    ),
-)
+        **PLOTLY_LAYOUT,
+        height=360,
+        hovermode='x unified',
+        xaxis=AXIS_STYLE,
+        yaxis={**AXIS_STYLE, "title": "PM2.5 (µg/m³)"},
+    )
     st.plotly_chart(fig, use_container_width=True)
 
     # Residuals + Distribution
@@ -554,7 +545,8 @@ with tab1:
         fig2.update_layout(
             **PLOTLY_LAYOUT,
             height=240,
-            yaxis_title="Error (µg/m³)",
+            xaxis=AXIS_STYLE,
+            yaxis={**AXIS_STYLE, "title": "Error (µg/m³)"},
         )
         st.plotly_chart(fig2, use_container_width=True)
 
@@ -572,8 +564,8 @@ with tab1:
         fig3.update_layout(
             **PLOTLY_LAYOUT,
             height=240,
-            xaxis_title="Error (µg/m³)",
-            yaxis_title="Count",
+            xaxis={**AXIS_STYLE, "title": "Error (µg/m³)"},
+            yaxis={**AXIS_STYLE, "title": "Count"},
         )
         st.plotly_chart(fig3, use_container_width=True)
 
@@ -760,8 +752,8 @@ with tab3:
         fig_bar.update_layout(
             **PLOTLY_LAYOUT,
             height=280,
-            yaxis_title="RMSE (µg/m³)",
-            xaxis_tickangle=-30,
+            xaxis={**AXIS_STYLE, "tickangle": -30},
+            yaxis={**AXIS_STYLE, "title": "RMSE (µg/m³)"},
         )
         st.plotly_chart(fig_bar, use_container_width=True)
 
@@ -781,8 +773,8 @@ with tab3:
         fig_bar2.update_layout(
             **PLOTLY_LAYOUT,
             height=280,
-            yaxis_title="MAPE (%)",
-            xaxis_tickangle=-30,
+            xaxis={**AXIS_STYLE, "tickangle": -30},
+            yaxis={**AXIS_STYLE, "title": "MAPE (%)"},
         )
         st.plotly_chart(fig_bar2, use_container_width=True)
 
