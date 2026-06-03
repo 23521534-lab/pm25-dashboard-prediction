@@ -295,7 +295,28 @@ st.markdown("""
         line-height: 1.6;
     }
 
-    /* Force Streamlit dataframe/table sang light */
+    /* Force file uploader sang light */
+    [data-testid="stFileUploader"] {
+        background-color: #ffffff !important;
+        border: 1px dashed #d0d7de !important;
+        border-radius: 8px !important;
+    }
+    [data-testid="stFileUploader"] * {
+        color: #1a1a2e !important;
+        background-color: transparent !important;
+    }
+    [data-testid="stFileUploadDropzone"] {
+        background-color: #ffffff !important;
+        border: 1px dashed #d0d7de !important;
+    }
+    [data-testid="stFileUploadDropzone"] * {
+        color: #57606a !important;
+    }
+    [data-testid="stFileUploadDropzone"] button {
+        background-color: #eef1f5 !important;
+        color: #1a1a2e !important;
+        border: 1px solid #d0d7de !important;
+    }
     [data-testid="stDataFrame"] * {
         color: #1a1a2e !important;
         background-color: transparent !important;
