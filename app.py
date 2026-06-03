@@ -881,18 +881,19 @@ with tab4:
             "PM2.5_roll7": ("Rolling mean 7 ngày (engineered)", "#00b894"),
             "month_sin/cos": ("Seasonality encoding (engineered)", "#74b9ff"),
         }
-        st.markdown("<div class='card'>", unsafe_allow_html=True)
+        # Build toàn bộ HTML features trong 1 lần
+        features_html = "<div class='card'>"
         for feat, (desc, col) in features.items():
-            st.markdown(f"""
+            features_html += f"""
             <div style='display:flex; justify-content:space-between; align-items:center;
                         padding:9px 0; border-bottom:1px solid #eef1f5;'>
                 <div>
                     <span style='font-family:Space Mono,monospace; font-size:12px; color:{col};'>{feat}</span>
                     <div style='font-size:11px; color:#57606a; margin-top:2px;'>{desc}</div>
                 </div>
-            </div>
-            """, unsafe_allow_html=True)
-        st.markdown("</div>", unsafe_allow_html=True)
+            </div>"""
+        features_html += "</div>"
+        st.markdown(features_html, unsafe_allow_html=True)
 
         st.markdown("<div class='section-title'>Pipeline Architecture</div>", unsafe_allow_html=True)
         st.markdown("""
