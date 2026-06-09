@@ -1,7 +1,7 @@
 # PM2.5 Forecast Dashboard
 IE212 - Công nghệ Dữ liệu Lớn · Nhóm 6
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://pm25-forecast-dashboard.streamlit.app/)
+[![Streamlit App](https://img.shields.io/badge/Streamlit-Demo-red?logo=streamlit)](https://pm25-forecast-dashboard.streamlit.app/)
 
 Dashboard trực quan hóa kết quả dự báo PM2.5 sử dụng các mô hình thống kê và học sâu, tích hợp với pipeline Big Data (Kafka → Spark → Model).
 
